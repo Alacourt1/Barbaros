@@ -350,7 +350,7 @@
             margin-top: 15px;
         }
         
-        /* Login Modal */
+        /* Modal Styles - OPTIMIZADO PARA EL FORMULARIO DE PROPIEDADES */
         .modal {
             display: none;
             position: fixed;
@@ -362,6 +362,8 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            overflow-y: auto;
+            padding: 20px 0;
         }
         
         .modal-content {
@@ -369,8 +371,11 @@
             border-radius: 10px;
             width: 100%;
             max-width: 500px;
-            padding: 40px;
+            max-height: 85vh; /* Reducido para que quepa mejor en pantalla */
+            overflow-y: auto; /* Agregado scroll interno */
+            padding: 30px; /* Reducido el padding */
             position: relative;
+            margin: auto;
         }
         
         .close-modal {
@@ -380,12 +385,14 @@
             font-size: 24px;
             cursor: pointer;
             color: var(--dark);
+            z-index: 1;
         }
         
         .modal-title {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* Reducido el margen */
             color: var(--primary);
+            font-size: 22px; /* Reducido el tamaño */
         }
         
         .auth-tabs {
@@ -415,22 +422,25 @@
             display: block;
         }
         
+        /* Form Styles - OPTIMIZADO PARA OCUPAR MENOS ESPACIO */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Reducido el margen entre campos */
         }
         
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: 500;
+            font-size: 14px; /* Reducido el tamaño */
         }
         
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px;
+            padding: 10px; /* Reducido el padding */
             border: 1px solid #ddd;
             border-radius: 5px;
             outline: none;
+            font-size: 14px; /* Reducido el tamaño */
         }
         
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
@@ -440,7 +450,15 @@
         .btn-full {
             width: 100%;
             padding: 12px;
-            margin-top: 10px;
+            margin-top: 15px; /* Aumentado para separar del último campo */
+            font-size: 16px;
+            position: sticky;
+            bottom: 0;
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
         }
         
         .social-login {
@@ -470,6 +488,16 @@
         .phone-verification {
             display: none;
             margin-top: 20px;
+        }
+        
+        /* Property Form Layout - OPTIMIZADO PARA DISEÑO MÁS COMPACTO */
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
         }
         
         /* Dashboard */
@@ -980,6 +1008,11 @@
                 right: 0;
                 border-radius: 0;
             }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
         }
     </style>
 </head>
@@ -1160,7 +1193,7 @@
                 
                 <div class="social-login">
                     <button class="social-btn" id="googleRegister">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjUxIDkuMjA0NTVDMTYuNTEgOC41NjYzNiAxNi40NDkgNy45NTQ1NSAxNi4zMTYgNy4zNjM2NEg5LjIyVjEwLjg0NTVIMTMuMzg0QzEzLjE4IDExLjk4IDEyLjQ5IDEyLjkyMjcgMTEuNDE4IDEzLjU2MzZWMTAuODQ1NUgxNC45NjRMMDYuNTEgOS4yMDQ1NVoiIGZpbGw9IiM0Mjg1RjQiLz4KPHBhdGggZD0iTTkuMjIgMTguMDA0NUMxMS44MiAxOC4wMDQ1IDEzLjk2IDE3LjE3MjcgMTUuNTk2IDE1LjU2MzZMMTMuNDE4IDEzLjgxODJDMTIuNTIgMTQuNTAxOCAxMS4zMiAxNC45MDkxIDkuMjIgMTQuOTA5MUM2LjU0IDE0LjkwOTEgNC4yNiAxMy4wOTA5IDMuNDYgMTAuNTQ1NUgwLjE2VDEyLjMwMThMOS4yMiAxOC4wMDQ1WiIgZmlsbD0iIzM0QTg1MyIvPgo8cGF0aCBkPSJNMy40NiAxMC41NDU1QzMuMDYgOS4zNjM2NCAzLjA2IDguMDgxODIgMy40NiA2LjkwMDAxVjMuNTQ1NDVIMC4xNkMtMS4wMiA2LjAwMDAxIC0xLjAyIDkuNDU0NTUgMC4xNiAxMi4wMDAxTDMuNDYgMTAuNTQ1NVoiIGZpbGw9IiNGQkJCMDAiLz4KPHBhdGggZD0iTTkuMjIgMy42MzYzNkMxMS4wOCAzLjYzNjM2IDEyLjY2IDQuMzQ1NDUgMTMuNzIgNS41NDU0NUwxNS42NiAzLjYwOTA5QzEzLjk2IDEuOTkwOTEgMTEuODIgMS4wMDAwMSA5LjIyIDEuMDAwMDFDNS40MiAxLjAwMDAxIDIuMDIgMy42MzYzNiAwLjE2IDcuMzYzNjRMMy40NiA4LjgxODJDNC4yNiA2LjI3MjczIDYuNTQgNC40NTQ1NSA5LjIyIDQuNDU0NTVWMy42MzYzNloiIGZpbGw9IiNFQTQzMzUiLz4KPC9zdmc+Cg==" alt="Google">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjUxIDkuMjA0NTVDMTYuNTEgOC41NjYzNiAxNi40NDkgNy45NTQ1NSAxNi4zMTYgNy4zNjM2NEg5LjIyVjEwLjg0NTVIMTMuMzg0QzEzLjE4IDExLjk4IDEyLjQ5IDEyLjkyMjcgMTEuNDE4IDEzLjU2MzZWMTAuODQ1NUgxNC45NjRMMDYuNTEgOS4yMDQ1NVoiIGZpbGw9IiM0Mjg1RjQiLz4KPHBhdGggZD0iTTkuMjIgMTguMDA0NUMxMS44MiAxOC4wMDQ1IDEzLjk2IDE3LjE3MjcgMTUuNTk2IDE1LjU2MzZMMTMuNDE4IDEzLjgxODJDMTIuNTIgMTQuNTAxOCAxMS4zMiAxNC45MDkxIDkuMjIgMTQuOTA5MUM2LjU0IDE0LjkwOTEgNC4yNiAxNS4wOTA5IDMuNDYgMTAuNTQ1NUgwLjE2VDEyLjMwMThMOS4yMiAxOC4wMDQ1WiIgZmlsbD0iIzM0QTg1MyIvPgo8cGF0aCBkPSJNMy40NiAxMC41NDU1QzMuMDYgOS4zNjM2NCAzLjA2IDguMDgxODIgMy40NiA2LjkwMDAxVjMuNTQ1NDVIMC4xNkMtMS4wMiA2LjAwMDAxIC0xLjAyIDkuNDU0NTUgMC4xNiAxMi4wMDAxTDMuNDYgMTAuNTQ1NVoiIGZpbGw9IiNGQkJCMDAiLz4KPHBhdGggZD0iTTkuMjIgMy42MzYzNkMxMS4wOCAzLjYzNjM2IDEyLjY2IDQuMzQ1NDUgMTMuNzIgNS41NDU0NUwxNS42NiAzLjYwOTA5QzEzLjk2IDEuOTkwOTEgMTEuODIgMS4wMDAwMSA5LjIyIDEuMDAwMDFDNS40MiAxLjAwMDAxIDIuMDIgMy42MzYzNiAwLjE2IDcuMzYzNjRMMy40NiA4LjgxODJDNC4yNiA2LjI3MjczIDYuNTQgNC40NTQ1NSA5LjIyIDQuNDU0NTVWMy42MzYzNloiIGZpbGw9IiNFQTQzMzUiLz4KPC9zdmc+Cg==" alt="Google">
                         Registrarse con Google
                     </button>
                 </div>
@@ -1168,7 +1201,7 @@
         </div>
     </div>
 
-    <!-- Add/Edit Property Modal -->
+    <!-- Add/Edit Property Modal - OPTIMIZADO PARA SER MÁS COMPACTO -->
     <div class="modal" id="propertyModal">
         <div class="modal-content">
             <span class="close-modal" id="closePropertyModal">&times;</span>
@@ -1180,22 +1213,24 @@
                     <input type="text" id="propertyTitle" placeholder="Ej: Hermosa casa familiar con jardín">
                 </div>
                 
-                <div class="form-group">
-                    <label for="propertyType">Tipo de Propiedad</label>
-                    <select id="propertyType">
-                        <option value="casa">Casa</option>
-                        <option value="apartamento">Apartamento</option>
-                        <option value="terreno">Terreno</option>
-                        <option value="oficina">Oficina</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="propertyOperation">Operación</label>
-                    <select id="propertyOperation">
-                        <option value="venta">Venta</option>
-                        <option value="alquiler">Alquiler</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="propertyType">Tipo</label>
+                        <select id="propertyType">
+                            <option value="casa">Casa</option>
+                            <option value="apartamento">Apartamento</option>
+                            <option value="terreno">Terreno</option>
+                            <option value="oficina">Oficina</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="propertyOperation">Operación</label>
+                        <select id="propertyOperation">
+                            <option value="venta">Venta</option>
+                            <option value="alquiler">Alquiler</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -1208,24 +1243,26 @@
                     <input type="text" id="propertyAddress" placeholder="Ej: Av. Principal 123, Ciudad">
                 </div>
                 
-                <div class="form-group">
-                    <label for="propertyBedrooms">Habitaciones</label>
-                    <input type="number" id="propertyBedrooms" placeholder="Ej: 3">
-                </div>
-                
-                <div class="form-group">
-                    <label for="propertyBathrooms">Baños</label>
-                    <input type="number" id="propertyBathrooms" placeholder="Ej: 2">
-                </div>
-                
-                <div class="form-group">
-                    <label for="propertyArea">Área (m²)</label>
-                    <input type="number" id="propertyArea" placeholder="Ej: 120">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="propertyBedrooms">Habitaciones</label>
+                        <input type="number" id="propertyBedrooms" placeholder="Ej: 3">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="propertyBathrooms">Baños</label>
+                        <input type="number" id="propertyBathrooms" placeholder="Ej: 2">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="propertyArea">Área (m²)</label>
+                        <input type="number" id="propertyArea" placeholder="Ej: 120">
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="propertyDescription">Descripción</label>
-                    <textarea id="propertyDescription" rows="4" placeholder="Describe tu propiedad..."></textarea>
+                    <textarea id="propertyDescription" rows="3" placeholder="Describe tu propiedad..."></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -2514,6 +2551,11 @@
             }
             
             propertyModal.style.display = 'flex';
+            
+            // Hacer scroll al principio del modal para asegurar que se vea el botón
+            setTimeout(() => {
+                propertyModal.scrollTop = 0;
+            }, 100);
         }
         
         // Guardar propiedad (nueva o editada)
@@ -2871,4 +2913,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

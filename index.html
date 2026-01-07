@@ -1,185 +1,1572 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title> Autoservicio – La esquina </title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-:root{
-  --bg:#f4f6f8;--card:#fff;--text:#111;
-  --primary:#2563eb;--danger:#dc2626;--ok:#16a34a;
-}
-body.dark{--bg:#0f172a;--card:#1e293b;--text:#e5e7eb}
-*{box-sizing:border-box;font-family:Arial}
-body{margin:0;background:var(--bg);color:var(--text)}
-.hidden{display:none}
-button{cursor:pointer}
-
-/* LOGIN */
-#login{height:100vh;display:flex;justify-content:center;align-items:center}
-.box{background:var(--card);padding:25px;border-radius:8px;width:320px}
-.box input,textarea{width:100%;padding:8px;margin:6px 0}
-
-/* LAYOUT */
-#app{display:flex;height:100vh}
-aside{width:240px;background:#111827;color:white;padding:15px}
-aside button{width:100%;margin:5px 0;padding:8px;background:#1f2937;border:none;color:white}
-main{flex:1;padding:15px;overflow:auto}
-.card{background:var(--card);padding:15px;border-radius:8px;margin-bottom:12px}
-table{width:100%;border-collapse:collapse}
-td,th{padding:6px;border-bottom:1px solid #ccc}
-.bad{color:var(--danger);font-weight:bold}
-.good{color:var(--ok);font-weight:bold}
-header{display:flex;justify-content:space-between;align-items:center}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería Manuelita - Estilo Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables y reset */
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #ff6b35;
+            --accent: #2d3436;
+            --light: #f8f9fa;
+            --dark: #121212;
+            --gray: #636e72;
+            --light-gray: #dfe6e9;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --error: #d63031;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(90deg, var(--secondary), #ff944d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2.5rem;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), #ff944d);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 6rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, var(--secondary), #ff944d);
+            color: white;
+            padding: 1rem 2.2rem;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-admin {
+            background: linear-gradient(90deg, #2d3436, #636e72);
+        }
+        
+        /* Header y Navegación */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--secondary), #ff944d);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .logo-text span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after,
+        nav ul li a.active:after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--secondary);
+        }
+        
+        .login-btn {
+            background: linear-gradient(90deg, var(--secondary), #ff944d);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(90deg, #e55a2b, #ff7b35);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80') no-repeat center center/cover;
+            color: white;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        /* Servicios */
+        .services {
+            background-color: #f8f9fa;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 148, 77, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 1.5rem 0;
+        }
+        
+        /* Galería */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            height: 300px;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Información */
+        .info-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            background: linear-gradient(135deg, #2d3436, #121212);
+            padding: 4rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .info-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 107, 53, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+        
+        .info-item h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .info-item p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hours-list {
+            list-style: none;
+            width: 100%;
+        }
+        
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Ubicación */
+        .location-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .map-container {
+            height: 450px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 5rem 0 2rem;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.7rem;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Modal de Login */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(30px);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background: linear-gradient(90deg, var(--secondary), #ff944d);
+            padding: 1.5rem 2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: white;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .modal-body {
+            padding: 2.5rem 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+        
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        
+        /* Panel de Administración */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+            z-index: 1500;
+            transition: var(--transition);
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        
+        .admin-panel.active {
+            right: 0;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .admin-header h3 {
+            margin: 0;
+            color: var(--secondary);
+        }
+        
+        .close-admin {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+        
+        .admin-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .admin-section h4 {
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .admin-section h4 i {
+            color: var(--secondary);
+        }
+        
+        .price-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .price-item h5 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        
+        .price-input {
+            width: 100px;
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .appointments-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .appointment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 1rem;
+        }
+        
+        .appointment-info h5 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        
+        .appointment-info p {
+            margin: 0.3rem 0 0;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .appointment-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .edit-btn {
+            background-color: rgba(0, 184, 148, 0.1);
+            color: var(--success);
+        }
+        
+        .delete-btn {
+            background-color: rgba(214, 48, 49, 0.1);
+            color: var(--error);
+        }
+        
+        .add-appointment {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .add-appointment input {
+            flex: 1;
+        }
+        
+        /* Alertas */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .alert-success {
+            background-color: rgba(0, 184, 148, 0.1);
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+        
+        .alert-error {
+            background-color: rgba(214, 48, 49, 0.1);
+            color: var(--error);
+            border-left: 4px solid var(--error);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                padding: 2rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                border-top: 1px solid var(--light-gray);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .admin-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .info-container {
+                padding: 2.5rem;
+            }
+            
+            .modal {
+                width: 95%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .info-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+            
+            .admin-panel {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-<div id="login">
-  <div class="box">
-    <h2>Ingreso</h2>
-    <input id="u" placeholder="Usuario">
-    <input id="p" type="password" placeholder="Contraseña">
-    <button onclick="login()">Entrar</button>
-  </div>
-</div>
-
-<div id="app" class="hidden">
-  <aside>
-    <h3>KIOSCO</h3>
-    <button onclick="view('ventas')">Ventas</button>
-    <button onclick="view('clientes')">Clientes</button>
-    <button onclick="view('stock')">Stock</button>
-    <button onclick="view('caja')">Caja</button>
-    <button onclick="view('facturacion')">Facturación</button>
-    <button onclick="view('empleados')">Empleados</button>
-    <button onclick="toggleDark()">🌙 Modo oscuro</button>
-    <button onclick="logout()">Salir</button>
-  </aside>
-
-  <main>
+    <!-- Header y Navegación -->
     <header>
-      <h2 id="title"></h2>
-      <div id="fecha"></div>
+        <div class="header-container container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cut"></i>
+                </div>
+                <div class="logo-text">Barbería<span>Manuelita</span></div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#inicio" class="active">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#informacion">Información</a></li>
+                    <li><a href="#ubicacion">Ubicación</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#" class="login-btn" id="openLoginModal">Login</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <div id="content"></div>
-  </main>
-</div>
 
-<script>
-/* ===== AUTH ===== */
-let session=JSON.parse(localStorage.getItem("session"))
-function login(){
-  if(u.value==="admin"&&p.value==="1234"){
-    session={user:"admin",role:"owner"}
-  }else if(u.value==="empleado"&&p.value==="1234"){
-    session={user:"empleado",role:"staff"}
-  }else return alert("Credenciales incorrectas")
-  localStorage.setItem("session",JSON.stringify(session))
-  location.reload()
-}
-function logout(){localStorage.clear();location.reload()}
-if(session){loginDiv.style.display="none";app.classList.remove("hidden")}
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Barbería Manuelita</h1>
+                <p>Donde la tradición barbera se fusiona con el estilo contemporáneo. Expertos en cortes clásicos y modernos, arreglo de barba y experiencias de cuidado masculino premium desde 1995.</p>
+                <div class="hero-btns">
+                    <a href="#servicios" class="btn">Nuestros Servicios</a>
+                    <a href="#contacto" class="btn btn-outline">Reservar Turno</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* ===== DATA ===== */
-let db=JSON.parse(localStorage.getItem("db"))||{
-  ventas:[],clientes:[],stock:[],
-  caja:{abierta:false,inicio:0,registros:[]},
-  empleados:[]
-}
-function save(){localStorage.setItem("db",JSON.stringify(db))}
+    <!-- Servicios -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos una gama completa de servicios de barbería con atención meticulosa a los detalles.</p>
+            </div>
+            
+            <div class="services-grid" id="servicesGrid">
+                <!-- Los servicios se cargarán dinámicamente desde JavaScript -->
+            </div>
+        </div>
+    </section>
 
-/* ===== NAV ===== */
-function view(v){
-  title.innerText=v.toUpperCase()
-  if(v==="ventas") ventas()
-  if(v==="clientes") clientes()
-  if(v==="stock") stock()
-  if(v==="caja") caja()
-  if(v==="facturacion") facturacion()
-  if(v==="empleados") empleados()
-}
-setInterval(()=>fecha.innerText=new Date().toLocaleString(),1000)
+    <!-- Galería -->
+    <section id="galeria">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestro Espacio</h2>
+                <p>Un ambiente diseñado para la comodidad y relajación, combinando elementos clásicos con un diseño moderno.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Interior de la barbería">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1585747870715-2ba37e788b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80" alt="Barbero trabajando">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1567894340315-735d7c361db0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80" alt="Herramientas de barbería">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1781&q=80" alt="Sala de espera">
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* ===== VENTAS ===== */
-function ventas(){
-content.innerHTML=`
-<div class="card">
-<input id="vp" placeholder="Producto">
-<input id="vt" type="number" placeholder="Total">
-<button onclick="addVenta()">Registrar venta</button>
-</div>
-<ul>${db.ventas.map(v=>`<li>${v.p} $${v.t}</li>`).join("")}</ul>`
-}
-function addVenta(){
-  db.ventas.push({p:vp.value,t:+vt.value,fecha:new Date()})
-  db.caja.registros.push({tipo:"venta",monto:+vt.value})
-  save();ventas()
-}
+    <!-- Información -->
+    <section id="informacion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Información</h2>
+                <p>Toda la información que necesitas para visitarnos y disfrutar de nuestros servicios.</p>
+            </div>
+            
+            <div class="info-container">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Horarios</h3>
+                    <ul class="hours-list">
+                        <li><span>Lunes - Viernes</span><span>9:00 - 20:00</span></li>
+                        <li><span>Sábado</span><span>9:00 - 18:00</span></li>
+                        <li><span>Domingo</span><span>10:00 - 16:00</span></li>
+                    </ul>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Dirección</h3>
+                    <p>Avenida Principal 456<br>Centro Comercial "Los Olivos"<br>Ciudad, CP 12345</p>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Contacto</h3>
+                    <p>Teléfono: (123) 456-7890<br>WhatsApp: (123) 456-7891<br>Email: contacto@barberiamanuelita.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* ===== CLIENTES ===== */
-function clientes(){
-content.innerHTML=`
-<div class="card">
-<input id="cn" placeholder="Nombre">
-<input id="cd" type="number" placeholder="Deuda">
-<button onclick="db.clientes.push({n:cn.value,d:+cd.value});save();clientes()">Agregar</button>
-</div>
-<ul>${db.clientes.map(c=>`<li>${c.n} <span class="${c.d>0?'bad':'good'}">$${c.d}</span></li>`).join("")}</ul>`
-}
+    <!-- Ubicación -->
+    <section id="ubicacion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ubicación</h2>
+                <p>Encuéntranos en el corazón de la ciudad, con fácil acceso y parking disponible.</p>
+            </div>
+            
+            <div class="location-container">
+                <div>
+                    <h3>¿Cómo llegar?</h3>
+                    <p>Nos ubicamos en el centro comercial "Los Olivos", con fácil acceso desde cualquier punto de la ciudad. Disponemos de estacionamiento gratuito para nuestros clientes.</p>
+                    <p>Si vienes en transporte público, las líneas 5, 12 y 24 tienen parada en "Avenida Principal", a solo 2 minutos caminando.</p>
+                    <p>Para los clientes que vienen en automóvil, ofrecemos un descuento del 30% en el parking del centro comercial presentando el ticket de compra de nuestros servicios.</p>
+                </div>
+                
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.016887889479!2d-58.38375902468507!3d-34.60373445749618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccac5f1b5b7c5%3A0xf9c2d5e8b0a6a0a5!2sObelisco%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1690926912345!5m2!1ses!2sar" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* ===== STOCK ===== */
-function stock(){
-content.innerHTML=`
-<div class="card">
-<input id="sn" placeholder="Producto">
-<input id="sc" type="number" placeholder="Cantidad">
-<button onclick="db.stock.push({n:sn.value,c:+sc.value});save();stock()">Agregar</button>
-</div>
-<ul>${db.stock.map(s=>`<li>${s.n} (${s.c})</li>`).join("")}</ul>`
-}
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Barbería Manuelita</h3>
+                    <p>Especialistas en cortes clásicos y modernos, arreglo de barba y experiencias de cuidado masculino premium desde 1995.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Horarios</h3>
+                    <p>Lunes - Viernes: 9:00 - 20:00</p>
+                    <p>Sábado: 9:00 - 18:00</p>
+                    <p>Domingo: 10:00 - 16:00</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 456, Centro</p>
+                    <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> contacto@barberiamanuelita.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Barbería Manuelita. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
-/* ===== CAJA (PROTEGIDA) ===== */
-function caja(){
-if(session.role!=="owner") return content.innerHTML="<p>Acceso restringido</p>"
-let total=db.caja.registros.reduce((a,r)=>a+r.monto,0)
-content.innerHTML=`
-<div class="card">
-<p>Estado: ${db.caja.abierta?"Abierta":"Cerrada"}</p>
-<input id="ci" type="number" placeholder="Monto inicial">
-<button onclick="db.caja={abierta:true,inicio:+ci.value,registros:[]};save();caja()">Abrir caja</button>
-<button onclick="db.caja.abierta=false;save();caja()">Cerrar caja</button>
-<p>Total en caja: <b>$${db.caja.inicio+total}</b></p>
-</div>`
-}
+    <!-- Modal de Login -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Acceso Administrador</h3>
+                <button class="close-modal" id="closeLoginModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="loginAlert" class="alert" style="display: none;"></div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Usuario</label>
+                        <input type="text" id="username" class="form-control" placeholder="Ingresa tu usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" id="cancelLogin">Cancelar</button>
+                <button type="submit" form="loginForm" class="btn btn-admin">Ingresar</button>
+            </div>
+        </div>
+    </div>
 
-/* ===== FACTURACIÓN (LOGIN DUEÑO) ===== */
-function facturacion(){
-if(session.role!=="owner") return content.innerHTML="<p>Acceso restringido</p>"
-let total=db.ventas.reduce((a,v)=>a+v.t,0)
-content.innerHTML=`
-<div class="card">
-<h3>Facturación</h3>
-<p>Total vendido: <b>$${total}</b></p>
-<p>Ventas: ${db.ventas.length}</p>
-</div>`
-}
+    <!-- Panel de Administración -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h3><i class="fas fa-user-shield"></i> Panel de Administración</h3>
+            <button class="close-admin" id="closeAdminPanel">&times;</button>
+        </div>
+        
+        <div id="adminAlert" class="alert" style="display: none;"></div>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-dollar-sign"></i> Gestión de Precios</h4>
+            <div class="price-controls" id="priceControls">
+                <!-- Los controles de precios se generarán dinámicamente -->
+            </div>
+            <button class="btn" id="savePrices" style="width: 100%; margin-top: 1rem;">
+                <i class="fas fa-save"></i> Guardar Precios
+            </button>
+        </div>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-calendar-alt"></i> Gestión de Turnos</h4>
+            <div class="appointments-list" id="appointmentsList">
+                <!-- Los turnos se cargarán dinámicamente -->
+            </div>
+            
+            <div class="add-appointment">
+                <input type="text" id="newAppointmentName" class="form-control" placeholder="Nombre del cliente">
+                <input type="text" id="newAppointmentTime" class="form-control" placeholder="HH:MM">
+                <button class="btn" id="addAppointmentBtn"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-sign-out-alt"></i> Sesión</h4>
+            <button class="btn btn-outline" id="logoutBtn" style="width: 100%;">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </button>
+        </div>
+    </div>
 
-/* ===== EMPLEADOS (SOLO DUEÑO) ===== */
-function empleados(){
-if(session.role!=="owner") return content.innerHTML="<p>Acceso restringido</p>"
-content.innerHTML=`
-<div class="card">
-<input id="en" placeholder="Empleado">
-<input id="ep" type="number" placeholder="Pago diario">
-<button onclick="db.empleados.push({n:en.value,p:+ep.value});save();empleados()">Agregar</button>
-</div>
-<ul>${db.empleados.map(e=>`<li>${e.n} – $${e.p}/día</li>`).join("")}</ul>`
-}
+    <script>
+        // Datos iniciales de la aplicación
+        let servicesData = [
+            { id: 1, name: "Corte de Cabello", icon: "fas fa-cut", description: "Cortes clásicos y modernos adaptados a tu estilo personal. Incluye lavado, corte y acabado profesional.", price: 25 },
+            { id: 2, name: "Afeitado Clásico", icon: "fas fa-air-freshener", description: "Afeitado tradicional con navaja straight, toallas calientes y productos premium para una experiencia única.", price: 30 },
+            { id: 3, name: "Arreglo de Barba", icon: "fas fa-user-tie", description: "Modelado, recorte y cuidado de barba con aceites y bálsamos especializados para un look impecable.", price: 20 },
+            { id: 4, name: "Corte + Barba", icon: "fas fa-gem", description: "Combinación perfecta: corte de cabello profesional más arreglo completo de barba con productos premium.", price: 40 },
+            { id: 5, name: "Tinte para Cabello", icon: "fas fa-palette", description: "Aplicación de tintes profesionales para cubrir canas o cambiar de look con productos de alta calidad.", price: 35 },
+            { id: 6, name: "Tratamiento Capilar", icon: "fas fa-spa", description: "Tratamientos rejuvenecedores para el cabello con productos especializados que nutren y fortalecen.", price: 45 }
+        ];
 
-/* ===== EXTRAS ===== */
-function toggleDark(){document.body.classList.toggle("dark")}
-</script>
+        let appointmentsData = [
+            { id: 1, name: "Juan Pérez", time: "10:30", date: "2023-10-15", service: "Corte de Cabello" },
+            { id: 2, name: "Carlos López", time: "14:00", date: "2023-10-15", service: "Afeitado Clásico" },
+            { id: 3, name: "Miguel Rodríguez", time: "16:45", date: "2023-10-15", service: "Corte + Barba" },
+            { id: 4, name: "Ana García", time: "11:15", date: "2023-10-16", service: "Tratamiento Capilar" }
+        ];
+
+        let isAdminLoggedIn = false;
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD = "1234";
+
+        // Elementos del DOM
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const openLoginModalBtn = document.getElementById('openLoginModal');
+        const loginModal = document.getElementById('loginModal');
+        const closeLoginModalBtn = document.getElementById('closeLoginModal');
+        const cancelLoginBtn = document.getElementById('cancelLogin');
+        const loginForm = document.getElementById('loginForm');
+        const loginAlert = document.getElementById('loginAlert');
+        const adminPanel = document.getElementById('adminPanel');
+        const closeAdminPanelBtn = document.getElementById('closeAdminPanel');
+        const servicesGrid = document.getElementById('servicesGrid');
+        const priceControls = document.getElementById('priceControls');
+        const appointmentsList = document.getElementById('appointmentsList');
+        const savePricesBtn = document.getElementById('savePrices');
+        const addAppointmentBtn = document.getElementById('addAppointmentBtn');
+        const newAppointmentName = document.getElementById('newAppointmentName');
+        const newAppointmentTime = document.getElementById('newAppointmentTime');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const adminAlert = document.getElementById('adminAlert');
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            renderServices();
+            renderPriceControls();
+            renderAppointments();
+            checkAdminSession();
+            
+            // Configurar eventos
+            setupEventListeners();
+        });
+
+        // Renderizar servicios
+        function renderServices() {
+            servicesGrid.innerHTML = '';
+            
+            servicesData.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.innerHTML = `
+                    <div class="service-icon">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <h3>${service.name}</h3>
+                    <p>${service.description}</p>
+                    <div class="price">$${service.price}</div>
+                    <a href="#contacto" class="btn">Reservar Turno</a>
+                `;
+                servicesGrid.appendChild(serviceCard);
+            });
+        }
+
+        // Renderizar controles de precios
+        function renderPriceControls() {
+            priceControls.innerHTML = '';
+            
+            servicesData.forEach(service => {
+                const priceItem = document.createElement('div');
+                priceItem.className = 'price-item';
+                priceItem.innerHTML = `
+                    <h5>${service.name}</h5>
+                    <div>
+                        $<input type="number" class="price-input" data-id="${service.id}" value="${service.price}" min="1" max="200">
+                    </div>
+                `;
+                priceControls.appendChild(priceItem);
+            });
+        }
+
+        // Renderizar turnos
+        function renderAppointments() {
+            appointmentsList.innerHTML = '';
+            
+            if (appointmentsData.length === 0) {
+                appointmentsList.innerHTML = '<p style="text-align: center; color: var(--gray);">No hay turnos programados</p>';
+                return;
+            }
+            
+            appointmentsData.forEach(appointment => {
+                const appointmentItem = document.createElement('div');
+                appointmentItem.className = 'appointment-item';
+                appointmentItem.innerHTML = `
+                    <div class="appointment-info">
+                        <h5>${appointment.name}</h5>
+                        <p>${appointment.date} a las ${appointment.time} - ${appointment.service}</p>
+                    </div>
+                    <div class="appointment-actions">
+                        <button class="action-btn edit-btn" data-id="${appointment.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" data-id="${appointment.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                appointmentsList.appendChild(appointmentItem);
+            });
+            
+            // Agregar eventos a los botones de editar y eliminar
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    editAppointment(id);
+                });
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    deleteAppointment(id);
+                });
+            });
+        }
+
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Menú móvil
+            mobileMenuBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Cerrar menú al hacer clic en un enlace
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Modal de login
+            openLoginModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.classList.add('active');
+            });
+            
+            closeLoginModalBtn.addEventListener('click', () => {
+                loginModal.classList.remove('active');
+                resetLoginForm();
+            });
+            
+            cancelLoginBtn.addEventListener('click', () => {
+                loginModal.classList.remove('active');
+                resetLoginForm();
+            });
+            
+            // Login form
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                handleLogin();
+            });
+            
+            // Cerrar modal al hacer clic fuera
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.classList.remove('active');
+                    resetLoginForm();
+                }
+            });
+            
+            // Panel de administración
+            closeAdminPanelBtn.addEventListener('click', () => {
+                adminPanel.classList.remove('active');
+            });
+            
+            // Guardar precios
+            savePricesBtn.addEventListener('click', savePrices);
+            
+            // Agregar turno
+            addAppointmentBtn.addEventListener('click', addAppointment);
+            
+            // Cerrar sesión
+            logoutBtn.addEventListener('click', logout);
+            
+            // Smooth scroll para enlaces internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Cambiar header al hacer scroll
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
+                }
+            });
+        }
+
+        // Manejar login
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                // Login exitoso
+                isAdminLoggedIn = true;
+                localStorage.setItem('adminLoggedIn', 'true');
+                
+                // Mostrar alerta de éxito
+                showAlert(loginAlert, 'success', '¡Ingreso exitoso! Redirigiendo al panel de administración...');
+                
+                // Cerrar modal después de 1.5 segundos
+                setTimeout(() => {
+                    loginModal.classList.remove('active');
+                    resetLoginForm();
+                    adminPanel.classList.add('active');
+                    showAlert(adminAlert, 'success', 'Bienvenido al panel de administración');
+                }, 1500);
+            } else {
+                // Login fallido
+                showAlert(loginAlert, 'error', 'Usuario o contraseña incorrectos');
+            }
+        }
+
+        // Resetear formulario de login
+        function resetLoginForm() {
+            loginForm.reset();
+            loginAlert.style.display = 'none';
+        }
+
+        // Verificar si hay sesión activa de admin
+        function checkAdminSession() {
+            const loggedIn = localStorage.getItem('adminLoggedIn');
+            if (loggedIn === 'true') {
+                isAdminLoggedIn = true;
+                // No abrir automáticamente el panel, pero actualizar el botón de login
+                openLoginModalBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin';
+                openLoginModalBtn.style.background = 'linear-gradient(90deg, #2d3436, #636e72)';
+            }
+        }
+
+        // Guardar precios
+        function savePrices() {
+            const priceInputs = document.querySelectorAll('.price-input');
+            
+            priceInputs.forEach(input => {
+                const id = parseInt(input.getAttribute('data-id'));
+                const newPrice = parseInt(input.value);
+                
+                // Actualizar en los datos
+                const serviceIndex = servicesData.findIndex(service => service.id === id);
+                if (serviceIndex !== -1) {
+                    servicesData[serviceIndex].price = newPrice;
+                }
+            });
+            
+            // Actualizar la visualización de servicios
+            renderServices();
+            
+            // Mostrar alerta de éxito
+            showAlert(adminAlert, 'success', 'Precios actualizados correctamente');
+            
+            // Guardar en localStorage
+            localStorage.setItem('barberiaServices', JSON.stringify(servicesData));
+        }
+
+        // Agregar turno
+        function addAppointment() {
+            const name = newAppointmentName.value.trim();
+            const time = newAppointmentTime.value.trim();
+            
+            if (!name || !time) {
+                showAlert(adminAlert, 'error', 'Por favor completa todos los campos');
+                return;
+            }
+            
+            // Validar formato de hora
+            const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+            if (!timeRegex.test(time)) {
+                showAlert(adminAlert, 'error', 'Formato de hora inválido. Usa HH:MM (ej: 14:30)');
+                return;
+            }
+            
+            // Crear nuevo turno
+            const newAppointment = {
+                id: appointmentsData.length > 0 ? Math.max(...appointmentsData.map(a => a.id)) + 1 : 1,
+                name: name,
+                time: time,
+                date: new Date().toISOString().split('T')[0], // Fecha actual
+                service: 'Servicio general'
+            };
+            
+            appointmentsData.push(newAppointment);
+            
+            // Actualizar lista
+            renderAppointments();
+            
+            // Limpiar campos
+            newAppointmentName.value = '';
+            newAppointmentTime.value = '';
+            
+            // Mostrar alerta de éxito
+            showAlert(adminAlert, 'success', 'Turno agregado correctamente');
+            
+            // Guardar en localStorage
+            localStorage.setItem('barberiaAppointments', JSON.stringify(appointmentsData));
+        }
+
+        // Editar turno
+        function editAppointment(id) {
+            const appointment = appointmentsData.find(a => a.id === id);
+            if (!appointment) return;
+            
+            // En una implementación real, aquí se abriría un modal para editar
+            // Por simplicidad, solo cambiaremos el nombre
+            const newName = prompt('Nuevo nombre para el turno:', appointment.name);
+            
+            if (newName && newName.trim() !== '') {
+                appointment.name = newName.trim();
+                renderAppointments();
+                showAlert(adminAlert, 'success', 'Turno actualizado correctamente');
+                
+                // Guardar en localStorage
+                localStorage.setItem('barberiaAppointments', JSON.stringify(appointmentsData));
+            }
+        }
+
+        // Eliminar turno
+        function deleteAppointment(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este turno?')) {
+                const index = appointmentsData.findIndex(a => a.id === id);
+                if (index !== -1) {
+                    appointmentsData.splice(index, 1);
+                    renderAppointments();
+                    showAlert(adminAlert, 'success', 'Turno eliminado correctamente');
+                    
+                    // Guardar en localStorage
+                    localStorage.setItem('barberiaAppointments', JSON.stringify(appointmentsData));
+                }
+            }
+        }
+
+        // Cerrar sesión
+        function logout() {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('adminLoggedIn');
+            adminPanel.classList.remove('active');
+            
+            // Restaurar botón de login
+            openLoginModalBtn.innerHTML = 'Login';
+            openLoginModalBtn.style.background = 'linear-gradient(90deg, var(--secondary), #ff944d)';
+            
+            showAlert(loginAlert, 'success', 'Sesión cerrada correctamente');
+        }
+
+        // Mostrar alerta
+        function showAlert(alertElement, type, message) {
+            alertElement.textContent = message;
+            alertElement.className = `alert alert-${type}`;
+            alertElement.style.display = 'flex';
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
+        // Cargar datos guardados en localStorage
+        function loadSavedData() {
+            const savedServices = localStorage.getItem('barberiaServices');
+            const savedAppointments = localStorage.getItem('barberiaAppointments');
+            
+            if (savedServices) {
+                servicesData = JSON.parse(savedServices);
+            }
+            
+            if (savedAppointments) {
+                appointmentsData = JSON.parse(savedAppointments);
+            }
+        }
+
+        // Cargar datos guardados al inicio
+        loadSavedData();
+    </script>
 </body>
 </html>
